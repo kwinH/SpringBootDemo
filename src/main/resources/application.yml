@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  servelet:
+    comtext-path: /hello
+name: test
+age: 11
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+  datasource:
+    url: jdbc:mysql://127.0.0.1/test?characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+### Mybatis 配置 ###
+mybatis:
+  mapperLocations: classpath:mapper/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.example.mapper.pojo  # 注意：对应实体类的路径
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#通用mapper配置
+mapper:
+  #公用接口类路径
+  mappers: com.example.mapper.baseDao.IBaseDao
+  identity: MYSQL
+
+### pagehelper分页插件 ###
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
